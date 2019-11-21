@@ -1,0 +1,13 @@
+
+  <div  class="web_error" *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)" >
+      <div *ngIf="registerForm.controls['name'].errors.required">* Full name is required</div>
+      <div *ngIf="registerForm.controls['name'].errors.maxlength ">* Maximum 25 character</div>
+      <div *ngIf="registerForm.controls['name'].errors.minlength ">* Minimum 3 character</div>
+  </div>
+
+                          
+
+phone:['',[Validators.required, Validators.pattern('^[0-9]+$'),Validators.minLength(10),Validators.maxLength(10)]],
+
+
+
