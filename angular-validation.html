@@ -1,3 +1,5 @@
+ <button type="submit" class="btn btn-ads"  [disabled]="change_pass.invalid">Submit </button>
+/*    -------------------   */
 
   <div  class="web_error" *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)" >
       <div *ngIf="registerForm.controls['name'].errors.required">* Full name is required</div>
