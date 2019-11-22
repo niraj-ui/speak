@@ -11,3 +11,67 @@ phone:['',[Validators.required, Validators.pattern('^[0-9]+$'),Validators.minLen
 
 
 
+/*  --------------------------------------    confrim password ----------------   */
+
+ new_password:['',[Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(5),Validators.maxLength(15)] ],
+confirm_password:['',Validators.required,],
+},{
+validators:MustMatch('new_password','confirm_password')
+})
+
+
+/*  -------------------------  import {MustMatch} from './must-match.validator'; -----     ----- */
+/*  ------ file name -------------   must-match.validator.ts  ------------------   */
+
+import { FormGroup } from '@angular/forms';
+
+// custom validator to check that two fields match
+export function MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
+
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+            // return if another validator has already found an error on the matchingControl
+            return;
+        }
+
+        // set error on matchingControl if validation fails
+        if (control.value !== matchingControl.value) {
+            matchingControl.setErrors({ mustMatch: true });
+        } else {
+            matchingControl.setErrors(null);
+        }
+    }
+}
+
+
+/*   --------------------------------------------       End file     must-match.validator.ts          ---------------   */
+
+
+
+
+  <input type="password" formControlName="new_password" class="form-control frm_field" placeholder="New Password">
+<div class="ment_error"  *ngIf="change_pass.controls['new_password'].invalid && (change_pass.controls['new_password'].dirty || change_pass.controls['new_password'].touched)" >
+    <div *ngIf="change_pass.controls['new_password'].errors.required">* New Password is required field.</div>
+    <div *ngIf="change_pass.controls['new_password'].errors.pattern ">* Should be combination of alpha numberic and special characters.</div>
+    <div *ngIf="change_pass.controls['new_password'].errors.maxlength">* Maximum 15 chracter</div>
+    <div *ngIf="change_pass.controls['new_password'].errors.minlength ">* Minimum 5 chracter</div>
+</div>
+
+/*  -------------------   */
+
+<input type="password" formControlName="confirm_password"  class="form-control frm_field" placeholder="Confirm Password">
+  <div class="ment_error" *ngIf="change_pass.controls['confirm_password'].invalid && (change_pass.controls['confirm_password'].dirty || change_pass.controls['confirm_password'].touched)" >
+  <div *ngIf="change_pass.controls['confirm_password'].errors.mustMatch ">* Specified password do not match</div>
+  </div>
+
+
+/*      ---------      */
+
+
+
+
+
+
+
