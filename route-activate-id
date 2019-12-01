@@ -1,0 +1,54 @@
+
+ <a routerLink="/app/a" fragment="bottom">A View #bottom</a><br />
+ 
+ 
+ /*---------------------------------------------------     -------------------     */
+ 
+ 
+ constructor(private _rout:ActivatedRoute){}
+ 
+ 
+ /*----------*/
+ 
+ 
+  ngAfterViewChecked(): void {
+
+   // console.log('sadasd')
+   // setTimeout(function(){  },100);
+    try {
+      if(this.fragment) {
+       // console.log(this.fragment);
+        document.querySelector('#' + this.fragment).scrollIntoView({ block: 'center', behavior: 'smooth' });
+     //  setTimeout(function(){  },3000);
+
+      }
+  } catch (e) { }
+
+
+
+  }
+  
+  
+  
+  
+  /*--------------------------------          ------------*/
+   this._rout.fragment.subscribe(fragment => {
+        return  this.fragment = fragment;
+       });
+  
+  
+  
+  
+  
+ /*-----------------------------************----------------
+ 
+ 
+ 
+ 
+ 
+ 
+@HostListener('window:scroll', ['$event']) // for window scroll events
+
+onScroll(event) {
+ this.fragment=''
+}
