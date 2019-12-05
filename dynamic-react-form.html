@@ -1,0 +1,18 @@
+            <form [formGroup]="email_Form" (ngSubmit)="email_submit()">
+              
+<div formArrayName="contact_emails" >
+  <div *ngFor="let line of email_Form.get('contact_emails').controls; let lineIndex = index" [formGroupName]="lineIndex">
+       Line Name: <input formControlName="email" type="text">  
+       <i class="fa fa-trash" aria-hidden="true" *ngIf="i != 0" (click)="remove_email_id(lineIndex)"></i>
+  </div>
+</div>
+<button type="submit" >button submit </button>
+            </form>
+            
+            /*----------------------  -*/
+            
+<button type="button" class="mt-3 btn btn-secondary" (click)="addEmails()">+ Add an Email</button>
+
+  /*----------------------  -*/
+            
+            
