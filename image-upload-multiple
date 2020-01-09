@@ -1,0 +1,38 @@
+//  -------  file uplaod  in modal in  ----- */
+		/**Attach Images */
+		onSelectedFile(event) {
+			for (let i = 0; i < event.target.files.length; i++) {
+			this.file = event.target.files[i];
+			// console.log(this.file)
+			// console.log(event.target.files[i])
+		//	console.log(this.files_name)
+			this.files_name.push(event.target.files[i]);
+			//console.log(this.files_name)
+			var reader = new FileReader();
+			reader.onload = (event: any) => {
+			//	console.log(event.target.result);
+			//	console.log(this.imageSrc)
+			this.imageSrc.push(event.target.result);
+			};
+			reader.readAsDataURL(event.target.files[i]);
+			}
+		} /**Attach Images */
+	
+		/**Remove Attached image */
+	
+		remove_attachments(event) {
+			 //console.log(event);
+			// var target = event.target || event.srcElement || event.currentTarget;
+			//  console.log(target);
+		//	var idAttr = target.attributes.id.value;
+		//	console.log(idAttr)
+			// console.log(idAttr)
+			this.files_name.splice(event, 1);
+			this.imageSrc.splice(event, 1);
+			
+			 console.log(this.files_name)
+		} /**Remove Attached image */
+
+		remove_old_attachments(event){
+			this.old_imageSrc.splice(event, 1);
+	}
